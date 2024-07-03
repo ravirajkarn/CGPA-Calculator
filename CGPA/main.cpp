@@ -17,7 +17,7 @@
 int main()
 {
     int size = 94 ;
-    unsigned int no_of_subject;
+    static int no_of_subject;
     Child Student;
     size_t maximum = 12;
     float total_points = 0;

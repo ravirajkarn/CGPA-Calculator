@@ -5,6 +5,16 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 project(CGPA_Calculator)
 
+# Adding third party dependencies
+include(FetchContent)
+FetchContent_Declare(
+  fmt
+  GIT_REPOSITORY https://github.com/fmtlib/fmt.git
+  GIT_TAG 10.1.1
+)
+FetchContent_MakeAvailable(fmt)
+
+# project build start
 add_library(header CGPA/classs.h)
 
 find_package(fmt)
