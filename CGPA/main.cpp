@@ -13,27 +13,32 @@
 #include <fmt/color.h>
 #include <cmath>
 #include "classs.h"
+#include <vector>
 
 int main()
 {
-    int size = 94 ;
-    static int no_of_subject;
-    Child Student;
-    size_t maximum = 12;
-    float total_points = 0;
+    int size = 94; // length of header and boundary 
+    Child Student; // basic/personal information about student.
+    size_t maximum = 12; // maximum length of subject entered. 
+    float total_points = 0;  // total points to calculate CGPA.
+    std::vector<Subject> subjects; // data of each subject.
+    int no_of_subject; // how may subject user will enter.
+
 
     //* Input module
     header(size);
     give_pdetail(Student); // take users personal detail
-
     fmt::print("How many subject are there? ");
     std::cin >> no_of_subject;
-    subject subj[no_of_subject];
 
     for (int i = 0; i < no_of_subject; i++)
     {
-        subj[i].init();
-        maximum = std::max(subj[i].name().size(), maximum);
+        std::string subj_name;
+        int full_marks, marks_obtain;
+
+        take_subj_info(subj_name, full_marks, marks_obtain); // gathering information about each subject.
+        subjects.push_back(Subject(subj_name, full_marks, marks_obtain)); // storing information of each subject.
+        maximum = (((subj_name.size()) > (maximum)) ? (subj_name.size()) : (maximum)); // storing the maximum length of subject.
     }
     
 
@@ -51,11 +56,20 @@ int main()
 
     int x = (size -19 -47 -maximum);
     fmt::print(fmt::bg(fmt::color::light_coral) | fmt::emphasis::underline, "| {0:>6} | {1:^{2}} | {3:^12} | {4:^14} | {5:^8} | {6:^7} |\n", "", "Subject", maximum + x, "Full Marks", "Marks Obtain", "Points", "Grade");
-    for (int i = 0; i < no_of_subject; i++)
+    // for (int i = 0; i < no_of_subject; i++)
+    // {
+    //     fmt::print(fmt::bg(fmt::color::light_coral) | fmt::emphasis::underline, "| {0:>5}) | {1:<{2}} | {3:^12} | {4:^14} | {5:^8.2} | {6:^7} |\n", i+1, "subj[i].name()", maximum + x, "subj[i].full_mark()", "subj[i].score()", "subj[i].point()", ptog(subj[i].point()));
+    //     total_points =  total_points + subj[i].point();        
+    // }
+
+    int i(0);
+    for (const auto& subject : subjects)
     {
-        fmt::print(fmt::bg(fmt::color::light_coral) | fmt::emphasis::underline, "| {0:>5}) | {1:<{2}} | {3:^12} | {4:^14} | {5:^8.2} | {6:^7} |\n", i+1, subj[i].name(), maximum + x, subj[i].full_mark(), subj[i].score(), subj[i].point(), ptog(subj[i].point()));
-        total_points =  total_points + subj[i].point();        
+        i++;
+        fmt::print(fmt::bg(fmt::color::light_coral) | fmt::emphasis::underline, "| {0:>5}) | {1:<{2}} | {3:^12} | {4:^14} | {5:^8.2} | {6:^7} |\n", i+1, subject.name() , maximum + x, subject.full_mark(), subject.score(), subject.point(), ptog(subject.point()));
+        total_points =  total_points + subject.point();
     }
+    
     
     fmt::print(fmt::bg(fmt::color::light_coral), "{0: <{1}}\n", " ",size);
     fmt::print(fmt::bg(fmt::color::light_coral), "{0: >{1}}{2: <{1}}\n", "CGPA: ",size/2,(static_cast<float>(total_points/no_of_subject)));

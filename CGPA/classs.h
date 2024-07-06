@@ -4,37 +4,40 @@
 #include <fmt/core.h>
 #include <iostream>
 #include <vector>
-#include <cstdlib>
-#include <windows.h> 
+
+#ifdef _WIN32
+        #include <windows.h> 
+    #else
+        #include <cstdlib>
+#endif
 
 /**
- * @brief class to store the data of each subject.
+ * @brief class to store the data of each Subject.
  */
-class subject
+class Subject
 {
 private:
     std::string subject_name;
     int marks_scored, full_marks;
 
 public:
-    subject() = default;
-    subject(std::string name, int full, int marks_obtain);
+    Subject(std::string name, int full, int marks_obtain);
     std::string name() const { return subject_name; }
     int score() const { return marks_scored; }
     int full_mark() const { return full_marks; }
     float point() const;
     void init(void);
-    ~subject() = default;
+    ~Subject() = default;
 };
 
 /**
- * @brief Construct a new subject::subject object
+ * @brief Construct a new Subject::Subject object
  *
- * @param name name of subject.
+ * @param name name of Subject.
  * @param full total marks of the paper.
  * @param marks_obtain how much marks you obtain?
  */
-subject::subject(std::string name, int full, int marks_obtain)
+Subject::Subject(std::string name, int full, int marks_obtain)
 {
     this->subject_name = name;
     this->marks_scored = marks_obtain;
@@ -42,19 +45,19 @@ subject::subject(std::string name, int full, int marks_obtain)
 }
 
 /**
- * @brief output point of the subject.
+ * @brief output point of the Subject.
  *
  * @return char
  */
-float subject::point() const
+float Subject::point() const
 {
     return ((static_cast<float>(this->marks_scored) / this->full_marks) * 10.0f);
 }
 
 /**
- * @brief Ask the use for subject, full marks and marks obtain.
+ * @brief Ask the use for Subject, full marks and marks obtain.
  */
-void subject::init()
+void Subject::init()
 {
     fmt::print("Enter subject name           : ");
     std::cin.ignore();
@@ -191,6 +194,19 @@ char ptog(float grade)
         return 'E';
     else
         return 'F';
+}
+
+void take_subj_info(std::string& subject_name, int& full_marks, int& marks_scored)
+{
+    fmt::print("Enter subject name           : ");
+    std::cin.ignore();
+    std::getline(std::cin, subject_name);
+
+    fmt::print("Enter full marks of the paper: ");
+    std::cin >> full_marks;
+
+    fmt::print("Enter marks obtain           : ");
+    std::cin >> marks_scored;   
 }
 
 #endif
