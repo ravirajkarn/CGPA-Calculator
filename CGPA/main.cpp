@@ -56,12 +56,6 @@ int main()
 
     int x = (size -19 -47 -maximum);
     fmt::print(fmt::bg(fmt::color::light_coral) | fmt::emphasis::underline, "| {0:>6} | {1:^{2}} | {3:^12} | {4:^14} | {5:^8} | {6:^7} |\n", "", "Subject", maximum + x, "Full Marks", "Marks Obtain", "Points", "Grade");
-    // for (int i = 0; i < no_of_subject; i++)
-    // {
-    //     fmt::print(fmt::bg(fmt::color::light_coral) | fmt::emphasis::underline, "| {0:>5}) | {1:<{2}} | {3:^12} | {4:^14} | {5:^8.2} | {6:^7} |\n", i+1, "subj[i].name()", maximum + x, "subj[i].full_mark()", "subj[i].score()", "subj[i].point()", ptog(subj[i].point()));
-    //     total_points =  total_points + subj[i].point();        
-    // }
-
     int i(0);
     for (const auto& subject : subjects)
     {

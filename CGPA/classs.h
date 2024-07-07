@@ -26,7 +26,6 @@ public:
     int score() const { return marks_scored; }
     int full_mark() const { return full_marks; }
     float point() const;
-    void init(void);
     ~Subject() = default;
 };
 
@@ -52,22 +51,6 @@ Subject::Subject(std::string name, int full, int marks_obtain)
 float Subject::point() const
 {
     return ((static_cast<float>(this->marks_scored) / this->full_marks) * 10.0f);
-}
-
-/**
- * @brief Ask the use for Subject, full marks and marks obtain.
- */
-void Subject::init()
-{
-    fmt::print("Enter subject name           : ");
-    std::cin.ignore();
-    std::getline(std::cin, subject_name);
-
-    fmt::print("Enter full marks of the paper: ");
-    std::cin >> full_marks;
-
-    fmt::print("Enter marks obtain           : ");
-    std::cin >> marks_scored;
 }
 
 /**
@@ -196,6 +179,13 @@ char ptog(float grade)
         return 'F';
 }
 
+/**
+ * @brief take detail of a subject
+ * 
+ * @param subject_name  name of the subject you want to add.
+ * @param full_marks full marks in the subject.
+ * @param marks_scored marks you scored.
+ */
 void take_subj_info(std::string& subject_name, int& full_marks, int& marks_scored)
 {
     fmt::print("Enter subject name           : ");
