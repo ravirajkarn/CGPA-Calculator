@@ -62,6 +62,6 @@ This project is licensed under the MIT License - see the [LICENSE](https://githu
 - Feel free give your thoughts and Recommendation in the matter. 
 - Any improvements you would like to see in the program.
 - Don't miss the error too.
-- [✉](mailto:ravirajkarn@outlook.com)
+- [✉](mailto:ravirajkarn+support@outlook.com)
 
 Happy coding! 🚀
